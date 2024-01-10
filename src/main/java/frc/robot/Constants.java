@@ -154,4 +154,8 @@ public final class Constants {
     public static final double xGoal = 0;
     public static final double yGoal = 0;
   }
+
+  public static final class VisionConstants{
+    public static final String camName = "";
+  }
 }

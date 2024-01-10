@@ -141,11 +141,11 @@ public final class Constants {
     public static final double kFreeSpeedRpm = 5676;
   }
   public static final class DriveCommandConstants {
-    public static final double kXP = 0;
+    public static final double kXP = 0.1;
     public static final double kXI = 0;
     public static final double kXD = 0;
 
-    public static final double kYP = 0;
+    public static final double kYP = 0.1;
     public static final double kYI = 0;
     public static final double kYD = 0;
 
@@ -154,6 +154,8 @@ public final class Constants {
 
     public static final double xGoal = 0;
     public static final double yGoal = 0;
+    public static final double kThetaP = 0.1;
+    public static final double kXToleranceMeters = 0;
   }
 
   public static final class VisionConstants{

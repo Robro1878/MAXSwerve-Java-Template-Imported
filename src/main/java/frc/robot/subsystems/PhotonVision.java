@@ -12,9 +12,11 @@ import org.photonvision.PhotonCamera;
 import org.photonvision.PhotonPoseEstimator;
 import org.photonvision.PhotonPoseEstimator.PoseStrategy;
 import org.photonvision.targeting.PhotonPipelineResult;
+import org.photonvision.targeting.PhotonTrackedTarget;
 
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
+import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.VisionConstants;
 
@@ -48,5 +50,13 @@ public class PhotonVision extends SubsystemBase {
 
   public Optional<EstimatedRobotPose> getEstimatedVisionPose(){
     return PoseEstimator.update();
+  }
+
+  public PhotonTrackedTarget getBestTarget(){
+    return getLatestResult().getBestTarget();
+  }
+
+  public Transform3d getCamToTarget(){
+    return getBestTarget().getBestCameraToTarget();
   }
 }

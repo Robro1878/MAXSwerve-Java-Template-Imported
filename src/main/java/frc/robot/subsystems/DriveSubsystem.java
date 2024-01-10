@@ -75,7 +75,10 @@ public class DriveSubsystem extends SubsystemBase {
         m_frontRight.getPosition(),
         m_rearLeft.getPosition(),
         m_rearRight.getPosition()
-      }, getPose());
+      }, new Pose2d());
+  
+  //Vision
+  PhotonVision m_vision = new PhotonVision();
 
   /** Creates a new DriveSubsystem. */
   public DriveSubsystem() {
@@ -92,6 +95,20 @@ public class DriveSubsystem extends SubsystemBase {
             m_rearLeft.getPosition(),
             m_rearRight.getPosition()
         });
+    
+    PoseEstimator.update(
+        Rotation2d.fromDegrees(m_gyro.getAngle()),
+        new SwerveModulePosition[] {
+            m_frontLeft.getPosition(),
+            m_frontRight.getPosition(),
+            m_rearLeft.getPosition(),
+            m_rearRight.getPosition()
+        });
+    if (m_vision.getEstimatedVisionPose().isPresent()){
+    PoseEstimator.addVisionMeasurement(
+      m_vision.getEstimatedVisionPose().get().estimatedPose.toPose2d(), 
+      m_vision.getEstimatedVisionPose().get().timestampSeconds);
+    }
   }
 
   /**

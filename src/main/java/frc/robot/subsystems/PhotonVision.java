@@ -5,8 +5,12 @@
 package frc.robot.subsystems;
 
 import java.io.IOException;
+import java.util.Optional;
 
+import org.photonvision.EstimatedRobotPose;
 import org.photonvision.PhotonCamera;
+import org.photonvision.PhotonPoseEstimator;
+import org.photonvision.PhotonPoseEstimator.PoseStrategy;
 import org.photonvision.targeting.PhotonPipelineResult;
 
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
@@ -18,6 +22,7 @@ public class PhotonVision extends SubsystemBase {
   /** Creates a new PhotonVision. */
   PhotonCamera cam;
   AprilTagFieldLayout aprilTagFieldLayout;
+  PhotonPoseEstimator PoseEstimator;
 
   public PhotonVision() {
     cam = new PhotonCamera(VisionConstants.camName);
@@ -26,6 +31,10 @@ public class PhotonVision extends SubsystemBase {
     catch(IOException IOE){
       IOE.printStackTrace();
     }
+
+    PoseEstimator = new PhotonPoseEstimator(
+      aprilTagFieldLayout, PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, VisionConstants.RobotToCam);
+
   }
 
   @Override
@@ -35,5 +44,9 @@ public class PhotonVision extends SubsystemBase {
 
   public PhotonPipelineResult getLatestResult(){
     return cam.getLatestResult();
+  }
+
+  public Optional<EstimatedRobotPose> getEstimatedVisionPose(){
+    return PoseEstimator.update();
   }
 }

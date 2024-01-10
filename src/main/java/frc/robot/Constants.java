@@ -6,6 +6,7 @@ package frc.robot;
 
 import com.revrobotics.CANSparkBase.IdleMode;
 
+import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
@@ -140,11 +141,11 @@ public final class Constants {
     public static final double kFreeSpeedRpm = 5676;
   }
   public static final class DriveCommandConstants {
-    public static final double kXP = 0;
+    public static final double kXP = 0.1;
     public static final double kXI = 0;
     public static final double kXD = 0;
 
-    public static final double kYP = 0;
+    public static final double kYP = 0.1;
     public static final double kYI = 0;
     public static final double kYD = 0;
 
@@ -153,5 +154,12 @@ public final class Constants {
 
     public static final double xGoal = 0;
     public static final double yGoal = 0;
+    public static final double kThetaP = 0.1;
+    public static final double kXToleranceMeters = 0;
+  }
+
+  public static final class VisionConstants{
+    public static final String camName = "";
+    public static final Transform3d RobotToCam = new Transform3d();
   }
 }
